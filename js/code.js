@@ -183,15 +183,15 @@ function searchColor()
 		document.getElementById("colorSearchResult").innerHTML = err.message;
 	}
 	
-function register()
+function doRegister()
 	{
-	let newUser = document.getElementById("colorText").value;
-        document.getElementById("colorAddResult").innerHTML = "";
+	let newUser = document.getElementById("").value;
+        document.getElementById("registerResult").innerHTML = "";
 
-        let tmp = {color:newColor,userId,userId};
+        let tmp = {username:newUser, userId:userId};
         let jsonPayload = JSON.stringify( tmp );
 
-        let url = urlBase + '/AddColor.' + extension;
+        let url = urlBase + '/Register.' + extension;
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
@@ -202,14 +202,14 @@ function register()
                 {
                         if (this.readyState == 4 && this.status == 200)
                         {
-                                document.getElementById("colorAddResult").innerHTML = "Color has been added";
+                                document.getElementById("registerResult").innerHTML = "User has been added";
                         }
                 };
                 xhr.send(jsonPayload);
         }
         catch(err)
         {
-                document.getElementById("colorAddResult").innerHTML = err.message;
+                document.getElementById("registerResult").innerHTML = err.message;
         }
 
 }
