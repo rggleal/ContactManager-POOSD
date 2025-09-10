@@ -138,3 +138,17 @@ select{
     font-family: 'Ubuntu', sans-serif;
     color: #95060a;
 }
+
+#firstName{
+    display: inline-block;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
+
+#lastName{
+    display: inline-block;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+}
