@@ -147,7 +147,7 @@ function addColor()
 	
 }
 
-function searchColor()
+function searchContact()
 {
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("colorSearchResult").innerHTML = "";
