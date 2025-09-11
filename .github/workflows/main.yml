@@ -5,15 +5,13 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the latest code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Deploy to the DigitalOcean Droplet via SSH
       - name: Deploy to Droplet via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
