@@ -6,6 +6,13 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
+const hamMenu = document.querySelector('.ham-menu');
+const offScreenMenu = document.querySelector('.off-screen-menu');
+hamMenu.addEventListener('click', () => {
+	hamMenu.classList.toggle('active');
+	offScreenMenu.classList.toggle('active');
+})
+
 function doLogin()
 {
 	userId = 0;
@@ -212,7 +219,6 @@ function doRegister()
                 document.getElementById("registerResult").innerHTML = err.message;
         }
 
+	}		
 }
 
-	
-	}
