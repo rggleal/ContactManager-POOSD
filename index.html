@@ -7,19 +7,21 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <body>
+	<div class="wrapper">
+		<h1 id="title">Contact Manager</h1>
+		<div id="loginDiv">
+			<span id="inner-title">PLEASE LOG IN</span>
+			<div style="text-align: center;">
+			<input type="text" id="loginName" placeholder="Username" /><br />
+			<input type="password" id="loginPassword" placeholder="Password"/><br />
+			<button type="button" class="loginButton" class="buttons" onclick="doLogin();"> Sign In </button>
+			<p>Don't have an account?</p>
+			
 
-<h1 id="title">Contact Manager</h1>
-
-<div id="loginDiv">
-	<span id="inner-title">PLEASE LOG IN</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Sign In </button>
-	<p>Don't have an account?</p>
-
-<button onclick="document.location='register.html'">Register</button>
-	<span id="loginResult"></span>
-</div>
-
+		<button class="signUpButton" onclick="document.location='register.html'">Register</button>
+			<span id="loginResult"></span>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<h1 id="title">COP 4331 LAMP Stack Team 15 Demo</h1>
+<h1 id="title">Contact Manager Home Page</h1>
 
 <div id="loggedInDiv">
 	<span id="userName"></span><br />
@@ -23,12 +23,48 @@
 </div>
 
 <div id="accessUIDiv">
-	<br />
 
+<table class="dataGrid">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone Number</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td>Austria</td>
+  </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Yoshi Tannamuri</td>
+    <td>Canada</td>
+  </tr>
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Giovanni Rovelli</td>
+    <td>Italy</td>
+  </tr>
+</table> 
 	<input type="text" id="searchText" placeholder="Contact To Search For"/>
-	<button type="button" id="searchColorButton" class="buttons" onclick="searchColor();"> Search Contact </button><br />
-	<span id="colorSearchResult"></span>
-	<p id="colorList">
+	<button type="button" id="searchColorButton" class="buttons" onclick="searchContact();"> Search Contact </button><br />
+	<span id="contactSearchResult"></span>
+	<p id="contactList">
 	</p><br /><br />
 
 	<input type="text" id="colorText" placeholder="Contact To Add">

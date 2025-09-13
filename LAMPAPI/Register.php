@@ -5,8 +5,8 @@
 
 	$firstName = $inData["firstName"];
 	$lastName = $inData["lastName"];
-	$username = $inData["login"];
-	$password = $inData["password"];
+	$username = $inData["registerUsername"];
+	$password = $inData["registerPassword"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
 	if( $conn->connect_error )
