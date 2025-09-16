@@ -15,12 +15,20 @@
 </head>
 <body>
 
-<h1 id="title">Contact Manager</h1>
-<table>
+<h1 id="title">Contact Manager Home Page</h1>
+
+<div id="loggedInDiv">
+	<span id="userName"></span><br />
+	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+</div>
+
+<div id="accessUIDiv">
+
+<table class="dataGrid">
   <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone Number</th>
   </tr>
   <tr>
     <td>Alfreds Futterkiste</td>
@@ -52,19 +60,11 @@
     <td>Giovanni Rovelli</td>
     <td>Italy</td>
   </tr>
-</table>
-<div id="loggedInDiv">
-	<span id="userName"></span><br />
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-</div>
-
-<div id="accessUIDiv">
-	<br />
-
+</table> 
 	<input type="text" id="searchText" placeholder="Contact To Search For"/>
 	<button type="button" id="searchColorButton" class="buttons" onclick="searchContact();"> Search Contact </button><br />
-	<span id="colorSearchResult"></span>
-	<p id="colorList">
+	<span id="contactSearchResult"></span>
+	<p id="contactList">
 	</p><br /><br />
 
 	<input type="text" id="colorText" placeholder="Contact To Add">
