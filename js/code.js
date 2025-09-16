@@ -45,7 +45,7 @@ function doLogin()
 		
 				if( userId < 1 )
 				{		
-					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					document.getElementById("loginResult").innerHTML = "Username or Password is incorrect";
 					return;
 				}
 		
@@ -54,7 +54,7 @@ function doLogin()
 
 				saveCookie();
 	
-				window.location.href = "contacts.html";
+				window.location.href = "contact.html";
 			}
 		};
 		xhr.send(jsonPayload);

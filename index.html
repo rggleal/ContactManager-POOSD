@@ -1,28 +1,32 @@
 <html>
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
+        <title>COP 4331 LAMP Stack Demo</title>
+        <script type="text/javascript" src="js/md5.js"></script>
+        <script type="text/javascript" src="js/code.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <body>
-	<h1 id="title">Contact Manager</h1>
-	<div class="wrapper">
-		<h1 id="title">Contact Manager</h1>
-		<div id="loginDiv">
-			<span id="inner-title">PLEASE LOG IN</span>
-			<div style="text-align: center;">
-			<input type="text" id="loginName" placeholder="Username" /><br />
-			<input type="password" id="loginPassword" placeholder="Password"/><br />
-			<button type="button" class="loginButton" class="buttons" onclick="doLogin();"> Sign In </button>
-			<p>Don't have an account?</p>
-			
+        <div style="width: 100%;text-align: center;padding: 5px;">
+        <img src="images/TITLE.png"  alt="Login" style="margin: 0 auto; cursor: pointer; width: 160px; height: auto;">
+        </div>
+        <div class="wrapper">
+                <div id="loginDiv">
+                        <div style="text-align: center;">
+                        <input type="text" id="loginName" placeholder="Username" /><br />
+                        <input type="password" id="loginPassword" placeholder="Password"/><br />
+                        <div>
+                        <img src="images/loginBubble.png"  alt="Login" style="cursor: pointer; width: 120px; height: auto;"
+                         onclick="doLogin();">
+                        </div>
+                        <p class="comic">Don't have an account?</p>
 
-		<button class="signUpButton" onclick="document.location='register.html'">Register</button>
-			<span id="loginResult"></span>
-			</div>
-		</div>
-	</div>
+                 <img src="images/registerButton.png"  alt="Login" style="cursor: pointer; width: 120px; height: auto;"
+                        onclick="document.location='register.html'">
+                        <p class="comic" id="loginResult"></p>
+                        </div>
+                </div>
+        </div>
 </body>
 </html>
