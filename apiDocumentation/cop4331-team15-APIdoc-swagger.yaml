@@ -1,0 +1,319 @@
+swagger: '2.0'
+info:
+  description: This is the API Endpoints documentation for the COP 4331 Contact Manager App, Hero Network, for Team 15
+  version: 1.0.0
+  title: Hero Network, The Contact Manager App 
+  # put the contact info for your development or API team
+  contact: 
+    email: re082262@ucf.edu
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+paths:
+  /Login.php:
+    post:
+      tags:
+      - Users
+      summary: Logs in to the contacts app
+      operationId: doLogin
+      description: Logs in to contacts app
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: loginItem
+        description: Login
+        schema:
+          $ref: '#/definitions/Login'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+  /AddColor.php:
+    post:
+      tags:
+      - AddColor
+      summary: Adds a contact
+      operationId: addColor
+      description: Adds a contact to the color app database
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Contact
+        schema:
+          $ref: '#/definitions/AddColor'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+  /SearchContacts.php:
+    post:
+      tags:
+      - Search
+      summary: Searches contacts
+      operationId: searchContact
+      description: Searches contact from the contact manager app database
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Contact Search
+        schema:
+          $ref: '#/definitions/Search'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+  /Register.php:
+    post:
+      tags:
+      - newUser
+      summary: registers new users into the contacts app
+      operationId: doRegister
+      description: register newUsers into contacts app
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Register
+        schema:
+          $ref: '#/definitions/Register'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+        500:
+          description: Server Error
+  /DeleteContact.php:
+    post:
+      tags:
+      - Delete
+      summary: Delete contacts
+      operationId: deleteContact
+      description: Deletes contact from the contact manager app database
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Delete Contact 
+        required: true
+        schema:
+          $ref: '#/definitions/Delete'
+      responses:
+        200:
+          description: OK
+        404:
+          description: URL Not Found
+  /EditContact.php:
+    post:
+      tags:
+      - Edit
+      summary: Edit contacts
+      operationId: editContact
+      description: Edit contact from the contact manager app database
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Edit Contact 
+        required: true
+        schema:
+          $ref: '#/definitions/Edit'
+      responses:
+        200:
+          description: OK
+        404:
+          description: No contact found to update
+  /FetchData.php:
+    get:
+      tags:
+      - Fetch
+      summary: Fetch contacts from db
+      operationId: getAllData
+      description: Fetch contacts from the contact manager app database
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: userId
+        type: integer
+        required: true
+        description: Fetch Contacts based on ID of logged user
+      responses:
+        200:
+          description: Successfully retrieved contacts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Fetch'
+        404:
+          description: URL Not Found
+
+definitions:
+  Login:
+    type: object
+    required:
+    - login
+    - password
+    properties:
+      login:
+        type: string
+        example: "fred"
+      password:
+        type: string
+        example: "secret"
+  AddColor:
+    type: object
+    required:
+    - firstName
+    - lastName
+    - phone
+    - email
+    - userId
+    properties:
+      firstName:
+        type: string
+        example: "Rick"
+      lastName:
+        type: string
+        example: "Leinecker"
+      phone:
+        type: string
+        example: "1234567890"
+      email:
+        type: string
+        example: "rickl@gmail.com"
+      userId:
+        type: integer
+        example: 1
+  Search:
+    type: object
+    required:
+    - search
+    - userId
+    properties:
+      search:
+        type: string
+        example: "Rick"
+      userId:
+        type: integer
+        example: 1
+  Register:
+    type: object
+    required:
+    - firstName
+    - lastName
+    - registerUsername
+    - registerPassword
+    properties:
+      firstName:
+        type: string
+        example: "Rick"
+      lastName:
+        type: string
+        example: "Leinecker"
+      registerUsername:
+        type: string
+        example: "RickL"
+      registerPassword:
+        type: string
+        example: "COP4331"
+  Delete:
+    type: object
+    required:
+    - userId
+    - id
+    properties:
+      userId:
+        type: integer
+        example: 1
+      id:
+        type: integer
+        example: 1
+  Edit:
+    type: object
+    required:
+    - firstName
+    - lastName
+    - phone
+    - email
+    - userId
+    - id
+    properties:
+      firstName:
+        type: string
+        example: "Rick"
+      lastName:
+        type: string
+        example: "Leinecker"
+      phone:
+        type: string
+        example: "1234567890"
+      email:
+        type: string
+        example: "rickl@gmail.com"
+      userId:
+        type: integer
+        example: 1
+      id:
+        type: integer
+        example: 1
+  Fetch:
+    type: object
+    required:
+    - id
+    - userId
+    - firstName
+    - lastName
+    - phone
+    - email
+    properties:
+      ID:
+        type: integer
+        example: 1
+      UserID:
+        type: integer
+        example: 1
+      FirstName:
+        type: string
+        example: "Rick"
+      LastName:
+        type: string
+        example: "Leinecker"
+      Phone:
+        type: string
+        example: "1234567890"
+      Email:
+        type: string
+        example: "rickl@gmail.com"
+
+host: team15poosd.xyz
+basePath: /LAMPAPI
+schemes:
+- http
