@@ -1,39 +1,118 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Register Page of Contact Manager. Accepts Registration Info from client to create new Users.">
+	<title>Contact Manager: COP 4331</title>
+        <script type="text/javascript" src="js/md5.js"></script>
+        <script type="text/javascript" src="js/code.js"></script>
+        <link href="css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
-<body>
-<h1 id="title">Register</h1>
-<div id="Register">
-	<span id="inner-title">Register</span>
-	<input type="text" id="firstName" placeholder="FirstName" required/><br />
-	<input type="text" id="lastName" placeholder="LastName"required/><br />
-	<input type="text" id="registerUsername" placeholder="Username"required/><br />
-	<input type="password" id="registerPassword" placeholder="Password"required/><br />
-	<button type="button" id="registerButton" class="buttons" onclick="doRegister();"> Sign Up </button>
-	<span id="registerResult"></span>
-</div>
-  <div class="container signin">
-	  
-    <p>Already have an account? <a href="index.html">Sign in</a>.</p>
-  </div>
-<!-- hamburger menu   -->
-<div class = "off-screen-menu">
-	<ul>
-		<li>Username</li>
-		<li>Logout</li>
-	</ul>
+<body style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(0, 0, 0, 0.65)), url('/images/comicBackground.jpg')";>
+	<div style="width: 100%;text-align: center;padding: 5px;">
+        <img src="images/registerTitle.png"  alt="Login" style="margin: 0 auto; cursor: pointer; width: 250px; height: auto;">
+        </div>
+	<div class="wrapper"> 
+                <div class="registerDiv">
+			<div style="display: contents; flex-direction: column; text-align: center;">
+        		<input type="text" id="firstName" placeholder="FirstName" required/><br />
+			<p style="font-size: 14px; color:red;" id="firstNameErrorMessage"></p>
+        		<input type="text" id="lastName" placeholder="LastName"required/><br />
+			<p style="font-size: 14px; color:red;" id="lastNameErrorMessage"></p>
+        		<input type="text" id="registerUsername" placeholder="Username"required/><br />
+			<p style="font-size: 14px; color:red;" id="usernameErrorMessage"></p>
+        		<input type="password" id="registerPassword" placeholder="Password"required/><br />
+			<p style="font-size: 14px; color:red;" id="passwordErrorMessage"></p>
+			<div class="register-Btn">
+				<img src="images/registerButton.png" alt="Login" style="cursor: pointer; width: 120px; height: auto;" onclick="doRegister();"></div>
+			<!---- <button style="background: #3ebc3e; color: white;" type="button" id="registerButton" class="buttons" onclick="doRegister();"> Register </button> --->
+			<div style="justify-content: center;font-size: 20px;padding-top:2px;">
+				 <p class="comic">Already have an account?</p>
+				<!--h3>Already have an account? </h3-->
+				<button class="loginbtn-regpg" onclick="window.location.href='index.html'">Login </button >
+			</div>
+        		<span id="registerResult"></span>
+                        </div>
+                </div>
+        </div>
+	<div class="spidey-logo">
+	<img src="https://www.firstcomicsnews.com/wp-content/uploads/2016/09/Amazing-Spider-Man-Logo-600x253.png" alt="">
+	</div> 
+
+<div class="spidey">
+	<div class="web"></div>
+	<div class="spidey-sense"></div>
+	<div class="head">
+		<div class="eye left"></div>
+		<div class="eye right"></div>
+	</div>
+	<div class="body">
+
+		<div class="neck"></div>
+		<div class="arm left">
+			<div class="forearm">
+				<div class="finger"></div>
+				<div class="finger"></div>
+				<div class="finger"></div>
+			</div>
+		</div>
+		<div class="arm right">
+			<div class="forearm">
+				<div class="finger"></div>
+				<div class="finger"></div>
+				<div class="finger"></div>
+			</div>
+		</div>
+		<div class="lowerbody">
+			<div class="leg right">
+				<div class="boot">
+					<div class="foot"></div>
+				</div>
+			</div>
+			<div class="leg left">
+				<div class="boot">
+					<div class="foot"></div>
+				</div>
+			</div>
+		</div>
+		<div class="emblem">
+			<div class="emblem-leg-tl"></div>
+			<div class="emblem-leg-tr"></div>
+			<div class="emblem-leg-bl"></div>
+			<div class="emblem-leg-br"></div>
+		</div>
+	</div>
 </div>
 
-<nav>
-	<div class = "ham-menu">
-		<span></span>
-		<span></span>
-	</div>
-</nav>
+<script>
+function triggerSpideyTransition() {
+    const spidey = document.querySelector('.spidey');
+
+    if (spidey) {
+       
+	spidey.classList.remove("swing");
+        // force browser to reflow so the new animation starts clean
+        void spidey.offsetWidth;
+
+        // add the transition class
+        spidey.classList.add('swing');
+
+        // redirect after animation completes
+	    spidey.addEventListener('animationend', ()=> {
+            window.location.href = 'index.html';
+        }, { once: true });
+    }
+}
+</script>
 </body>
 </html>
+
+
+</body>
+</html>
+
+
+

@@ -1,58 +1,59 @@
-
 <?php
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+$allowed_origins = [
+    'http://team15poosd.xyz',
+];
 
-	$inData = getRequestInfo();
-	
-	$id = 0;
-	$firstName = "";
-	$lastName = "";
+if (in_array($origin, $allowed_origins, true)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Vary: Origin");
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
-	if( $conn->connect_error )
-	{
-		returnWithError( $conn->connect_error );
-	}
-	else
-	{
-		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
-		$stmt->execute();
-		$result = $stmt->get_result();
+}
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Content-Type: application/json; charset=utf-8");
 
-		if( $row = $result->fetch_assoc()  )
-		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
-		}
-		else
-		{
-			returnWithError("No Records Found");
-		}
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
 
-		$stmt->close();
-		$conn->close();
-	}
-	
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
+function getRequestInfo() {
+    $raw = file_get_contents('php://input');
+    $data = json_decode($raw, true);
+    return is_array($data) ? $data : [];
+}
 
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-	
-	function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-	function returnWithInfo( $firstName, $lastName, $id )
-	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-?>
+function sendJson($obj, $status = 200) {
+    http_response_code($status);
+    echo json_encode($obj, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// ===== Main =====
+$inData = getRequestInfo();
+
+$login = $inData['login'] ?? '';
+$password = $inData['password'] ?? '';
+
+if ($login === '' || $password === '') {
+    sendJson(['id'=>0,'firstName'=>'','lastName'=>'','error'=>'Missing login or password'], 400);
+}
+
+$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+if ($conn->connect_error) {
+    sendJson(['id'=>0,'firstName'=>'','lastName'=>'','error'=>$conn->connect_error], 500);
+}
+
+$conn->set_charset('utf8mb4');
+
+$stmt = $conn->prepare("SELECT ID, firstName, lastName FROM Users WHERE Login = ? AND Password = ?");
+$stmt->bind_param("ss", $login, $password);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    sendJson(['id'=>(int)$row['ID'], 'firstName'=>$row['firstName'], 'lastName'=>$row['lastName'], 'error'=>'']);
+} else {
+    sendJson(['id'=>0,'firstName'=>'','lastName'=>'','error'=>'No Records Found'], 401);
+}

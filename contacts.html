@@ -1,76 +1,178 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
+	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Home Page of Contact Manager. Includes Dashboard, Add, Edit, Search, and Delete Contacts from Table.">
+	<title>Contact Manager: COP 4331</title>
 	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	
+	<link href="css/styles.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+
 	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() 
-	{
-		readCookie();
-	}, false);
+		document.addEventListener('DOMContentLoaded', function () {
+			readCookie();
+		}, false);
 	</script>
-	
+
 </head>
-<body>
+<!-- used to check if site is on contacts page + load database -->
+<body data-page="contacts"></body>
 
-<h1 id="title">Contact Manager Home Page</h1>
+<body style="background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/images/comicBackground.jpg')";>
 
-<div id="loggedInDiv">
-	<span id="userName"></span><br />
-	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
-</div>
+	<body>
+		<div style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 5px;">
+			 <img src="images/AllianceContacts.png" alt="Hero Network" style="cursor: pointer; width: 250px; height: auto; margin: auto;">
+		
+	<div class="hamburger-menu">
+        <div class="menu-container" id="hamburgerContainer">
+            <input id="menu__toggle" type="checkbox" aria-label="Hamburger button icon"/>
+            <label class="menu__btn" for="menu__toggle" aria-label="Hamburger menu button">
+		    <span></span>
+		    <p style="margin-right: 90px;font-size: 20px;color: white; font-family: "Border",cursive ">Account</p>
+            </label>
+            <ul class="menu__box">    
+		<li><span id="loginInfo" style="color:white; padding:10px; font-size:20px;"></span></li>
+		<li><button type="button" id="logoutButton" class="buttons" onclick="doLogout();">Logout</button></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+	</body>
+        <div class="search-box">
+		<!--- <i class="fa fa-search search-icon"></i> --->
+	    <input type="text" id="searchText" placeholder="Search contacts by name, phone, or email...">
+            <button class="clear-btn" onclick="clearSearch()">Show All</button>
+				
+	    <button class="add-btn" id="addButton" onclick="showAddModal()"><i class="fa fa-solid fa-plus"></i>   New Contact</button> 
+	    </div> 
 
-<div id="accessUIDiv">
+<!---
+        <div id="searchResult" class="search-result"></div>
+    </div>
+	        <button class="add-button" id="addButton" onclick="showAddModal()"><i class="fa fa-solid fa-plus"></i>Add New Contact</button> 
+		<table id="ContactTable" class="styled-table">
+			<thead>
+				<tr style="background-color: #22d16e;height: 40px;">
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone # </th>
+					<th>Email</th>
+					<th> </th>
+					<th> </th>
 
-<table class="dataGrid">
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Phone Number</th>
-  </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-  <tr>
-    <td>Laughing Bacchus Winecellars</td>
-    <td>Yoshi Tannamuri</td>
-    <td>Canada</td>
-  </tr>
-  <tr>
-    <td>Magazzini Alimentari Riuniti</td>
-    <td>Giovanni Rovelli</td>
-    <td>Italy</td>
-  </tr>
-</table> 
-	<input type="text" id="searchText" placeholder="Contact To Search For"/>
-	<button type="button" id="searchColorButton" class="buttons" onclick="searchContact();"> Search Contact </button><br />
-	<span id="contactSearchResult"></span>
-	<p id="contactList">
-	</p><br /><br />
+				</tr>
 
-	<input type="text" id="colorText" placeholder="Contact To Add">
-	<button type="button" id="addColorButton" class="buttons" onclick="addColor();"> Add Contact </button><br />
-	<span id="colorAddResult"></span>
-</div>
+			</thead>
+
+			<tbody>
+
+
+			</tbody>
+
+		</table>
+
+
+</div> --->
+
+<div id="ContactCards" class="cards-container"></div>
+
+
+	<script> window.onload = function gettingData() {
+			getAllData();
+			setupRealTimeSearch();
+		} </script>
+
+
+  <div style="position: relative; width: 200px; height: auto; display: inline-block;">
+  
+
+	<!-- Create/Add Contact Dialog --->
+	<dialog id="createModal">
+        <div class="modal-header">
+            <h3>Add Contact</h3>
+            <!---div class="contact-name" id="currentEditContact"></div--->
+        </div>
+        <div class="modal-body">
+            <form id="addForm">
+                    <div class="form-group">
+                        <label for="createFirstName">First Name:</label>
+                        <input type="text" id="createFirstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="createLastName">Last Name:</label>
+                        <input type="text" id="createLastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="createPhone">Phone:</label>
+                        <input type="tel" id="createPhone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="createEmail">Email:</label>
+                        <input type="email" id="createEmail" name="email" required>
+                    </div>
+                    <div id="createResult"></div>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn btn-cancel" onclick="cancelCreate()">Cancel</button>
+            <button class="modal-btn btn-edit" onclick="addContact()">Create Contact</button>
+        </div>
+    </dialog>
+
+    <!---- Reading/Search --->
+
+	<!--- Update/Edit Contact Dialog --->
+	<dialog id="editModal">
+        <div class="modal-header">
+            <h3>Edit Contact</h3>
+	    <div class="contact-name" id="currentEditContact"></div>
+        </div>
+        <div class="modal-body">
+            <form id="editForm">
+                    <div class="form-group">
+                        <label for="editFirstName">First Name:</label>
+                        <input type="text" id="editFirstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editLastName">Last Name:</label>
+                        <input type="text" id="editLastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPhone">Phone:</label>
+                        <input type="tel" id="editPhone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email:</label>
+                        <input type="email" id="editEmail" name="email" required>
+                    </div>
+                    <div id="editResult"></div>
+                </form>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn btn-cancel" onclick="cancelEdit()">Cancel</button>
+            <button class="modal-btn btn-edit" onclick="doEdit()">Update Contact</button>
+        </div>
+    </dialog>
+
+	<!-- Delete Confirmation Dialog -->
+    	<dialog id="deleteModal">
+        <div class="modal-header">
+            <h3>Delete Contact</h3>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete:</p>
+            <div class="contact-name" id="contactToDelete"></div>
+            <p>This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn btn-cancel" onclick="cancelDelete()">Cancel</button>
+            <button class="modal-btn btn-delete" onclick="doDelete()">Delete</button>
+        </div>
+    </dialog>
 
 </body>
+
 </html>

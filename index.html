@@ -1,31 +1,45 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-        <title>COP 4331 LAMP Stack Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Initial Login Page of Contact Manager. Takes User's credentials, allows user to signup/register new Users if needed.">
+        <title>Contact Manager: COP 4331</title>
         <script type="text/javascript" src="js/md5.js"></script>
         <script type="text/javascript" src="js/code.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="css/styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
-<body>
+<body style="background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url('/images/comicBackground.jpg')";>
+
         <div style="width: 100%;text-align: center;padding: 5px;">
-        <img src="images/TITLE.png"  alt="Login" style="margin: 0 auto; cursor: pointer; width: 160px; height: auto;">
+        <img src="images/HeroNetwork.png"  alt="Login" style="margin: 0 auto; cursor: pointer; width: 250px; height: auto;">
         </div>
-        <div class="wrapper">
+	<div class="container" id="shield">
+    <div class="shadow"></div>
+    <div class="circle-2"></div>
+    <div class="circle-3"></div>
+    <div class="circle-4"></div>
+    <div class="star"></div>
+  </div>
+
+
+        <div class="loginWrapper">
                 <div id="loginDiv">
-                        <div style="text-align: center;">
+			  
                         <input type="text" id="loginName" placeholder="Username" /><br />
                         <input type="password" id="loginPassword" placeholder="Password"/><br />
-                        <div>
+			<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">	
                         <img src="images/loginBubble.png"  alt="Login" style="cursor: pointer; width: 120px; height: auto;"
                          onclick="doLogin();">
-                        </div>
+			<p style="font-size:14px; color:red;" id="loginError"></p>
+			<p style="font-size:14px; color:red;" id="loginResult"></p>
                         <p class="comic">Don't have an account?</p>
 
                  <img src="images/registerButton.png"  alt="Login" style="cursor: pointer; width: 120px; height: auto;"
                         onclick="document.location='register.html'">
-                        <p class="comic" id="loginResult"></p>
-                        </div>
+			<!--button class="loginbtn-regpg" onclick="window.location.href='register.html'">Register </button-->                        
+			</div>
                 </div>
         </div>
 </body>

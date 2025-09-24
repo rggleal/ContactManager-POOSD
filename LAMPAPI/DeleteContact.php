@@ -2,13 +2,8 @@
 
 	$inData = getRequestInfo();
 	
-	$firstName = $inData["firstName"];
-	$lastName = $inData["lastName"];
-	$phone = $inData["phone"];
-	$email = $inData["email"];
-    $userId = $inData["userId"];
-
-
+	$userId = (int) $inData["userId"];
+	$id = (int) $inData["id"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -17,14 +12,14 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("DELETE FROM Contacts WHERE FirstName=? AND LastName=? AND Phone=? AND Email=? AND UserID=?");
-		$stmt->bind_param("sssss", $firstName, $lastName, $phone, $email, $userId);
-		$stmt->execute();
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE ID=? AND UserID=?");
+		$stmt->bind_param("ii", $id, $userId);
+		//$stmt->execute();
 		
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
+		returnWithError("Selected Contact was successfully deleted!");
 	}
 
 	function getRequestInfo()
@@ -40,7 +35,7 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 		

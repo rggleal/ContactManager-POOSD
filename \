@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title>COP 4331 LAMP Stack Demo</title>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() 
+	{
+		readCookie();
+	}, false);
+	</script>
+	
+</head>
+<body>
+
+<h1 id="title">Contact Manager Home Page</h1>
+
+<div id="loggedInDiv">
+	<span id="userName"></span><br />
+	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+</div>
+
+<div class="table-div">
+
+	<table id="ContactTable" class="styled-table" >
+		<thead>
+		<tr>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Phone # </th>
+		<th>Email</th>
+
+		</tr>
+
+		</thead>
+
+		<tbody>
+
+
+		</tbody>
+
+	</table>
+
+
+</div>
+
+<script> window.onload = function gettingData(){
+	  getAllData();
+	} </script>
+
+
+
+</body>
+</html>

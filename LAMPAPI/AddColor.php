@@ -5,10 +5,7 @@
 	$lastName = $inData["lastName"];
 	$phone = $inData["phone"];
 	$email = $inData["email"];
-
-
-	// $color = $inData["color"];
-	$userId = $inData["userId"];
+	$userId = (int)$inData["userId"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -17,12 +14,12 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, PhoneNum, Email, UserId) VALUES(?,?,?,?,?)");
-		$stmt->bind_param("ssss", $firstName, $lastName, $phone, $email, $userId);
+		$stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, Phone, Email, UserId) VALUES(?,?,?,?,?)");
+		$stmt->bind_param("ssssi", $firstName, $lastName, $phone, $email, $userId);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
+		returnWithError("Successfully added new contact!");
 	}
 
 	function getRequestInfo()
@@ -38,7 +35,7 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"error":"' . $err . '"}';
+		$retValue = '{""' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	

@@ -6,6 +6,7 @@
 	$phone = $inData["phone"];
 	$email = $inData["email"];
 	$userId = $inData["userId"];
+	$id = $inData["id"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -15,8 +16,15 @@
 	else
 	{
 		$stmt = $conn->prepare("UPDATE Contacts SET FirstName=?, LastName=?, Phone=?, Email=? WHERE UserID=? AND ID=?");
-		$stmt->bind_param("ssssss", $firstName, $lastName, $phone, $email, $userId, $inData["ID"]);
+		$stmt->bind_param("ssssii", $firstName, $lastName, $phone, $email, $userId, $id);
 		$stmt->execute();
+
+		if ($stmt->affected_rows > 0) {
+			returnWithError("Successfully edited desired contact!");
+		} else {
+			returnWithError("error: No contact found to update");
+		}
+
 		$stmt->close();
 		$conn->close();
 		returnWithError("");
@@ -35,7 +43,7 @@
 	
 	function returnWithError( $err )
 	{
-		$retValue = '{"error":"' . $err . '"}';
+		$retValue = '{"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
